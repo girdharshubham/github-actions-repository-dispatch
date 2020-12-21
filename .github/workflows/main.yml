@@ -1,0 +1,22 @@
+name: Job Dispatcher
+
+on:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - feature/**
+jobs:
+  dispatcher:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Dispatch workflow
+        run: |
+          git branch -l
+          CURRENT_BRANCH=$(git branch --show-current)
+          curl -X POST https://api.github.com/repos/girdharshubham/github-actions-repository-dispatch/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACCESS_TOKEN }} \
+          --data '{"event_type": "one", "client_payload": { "branch": "'"$CURRENT_BRANCH"'" }}'

@@ -1,0 +1,25 @@
+name: Job Collection
+
+on:
+  repository_dispatch:
+jobs:
+  one:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+      - name: Dispatch workflow
+        run: |
+          git branch --show-current
+          echo "Dispatched One"
+  two:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+      - name: Dispatch workflow
+        run: |
+          git branch --show-current
+          echo "Dispatched Two"
