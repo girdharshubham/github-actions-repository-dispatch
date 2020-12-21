@@ -10,7 +10,7 @@ jobs:
         with:
           ref: ${{ github.event.client_payload.branch }}
       - name: Dispatch workflow
-        if: github.event.client_payload.job == "one"
+        if: github.event.client_payload.job == 'one'
         run: |
           git branch --show-current
           echo "Dispatched One"
@@ -21,7 +21,7 @@ jobs:
         with:
           ref: ${{ github.event.client_payload.branch }}
       - name: Dispatch workflow
-        if: github.event.client_payload.job == "two"
+        if: github.event.client_payload.job == 'two'
         run: |
           git branch --show-current
           echo "Dispatched Two"
